@@ -312,3 +312,169 @@ To walk over all keys of an object.
             ...
         }
     }
+
+## Numbers
+
+### More ways to write a number
+    let billion = 1e9; //1 billion, literally: 1 and 9 zeroes
+    let ms = 1e-6; // 1 microseconds 0,000001
+
+In other words "e" multiplies the number by 1 with the given zeroes count.
+
+    1e3 = 1 * 1000
+
+### Hex, binary and octal number
+    alert( 0xff ); //255
+    alert( 0xFF ); //255 (the same, case doesn't matter)
+
+    let a = 0b11111111; //binary from of 255
+    let b = 0o377; //octal form of 255
+
+### toString(base)
+The method num.toString(base) returns a string representation of num in the numeral system with the give base.  
+
+    let num = 255;
+    alert( num.toString(16) ); // ff
+    alert( num.toString(2) ); //11111111
+
+The base can vary from 2 to 36. By default it's 10.
+
+### Rounding
+
+    Math.floor
+
+Rounds down 3.1 becomes 3, and -1.1 becomes -2.
+
+    Math.ceil
+
+Rounds up: 3.1 becomes 4, and -1.1 becomes -1.
+
+    Math.round
+
+Rounds to the nearest integer: 3.1 becomes 3, 3.6 becomes 4 and -1.1 becomes -1.
+
+    Math.trunc //(not supported by internet explorer)
+
+Removes anything after the decimal point without rounding 3.1 becomes 3, -1.1 becomes -1.
+    
+    let num = 12.34
+    num.toFixed(1) // "12.3"
+
+The method toFixed(n) rounds the number to n digits after the point and returns a string representation.
+
+### parseInt(), parseFloat()
+
+    parseInt('100px') // 100
+    parseFloat('12.5em') //12.5
+
+The parseInt() function has an optional second parameter. It specifies the base of the numeral system.
+
+    parseInt('0xff', 16) // 255
+    parseInt('ff', 16) // 255
+    
+## Strings
+
+### Special Characters
+
+| Character     | Description   |
+| ------------- |:-------------:|
+| \n            | New line      |
+| \b            | Backspace     |
+| \f            | Form feed     |
+| \r            |Carriage return|
+| \t            | Tab           |
+| \uNNNN        |Unicode symbol |
+| \u{NNNNNNNN}  |2 unicode symbol|
+
+    alert("\u00A9"); //copyright symbol
+
+### String length
+
+    alert( `My \n`.length ); // 3
+
+### Accessing characters
+To get a character at position pos, use square brackets [pos], or call the method str.charAt(pos).
+
+    let str = 'Hello';
+    alert(str[0]); //H
+    alert(str.charAt(0)); //H
+
+### Changing the case
+    alert( 'Interface'.toUpperCase() ) //INTERFACE
+    alert( 'Interface'.toLowerCase() ) //interface
+
+### Searching for a substring
+    str.indexOf('widget')
+    str.indexOf('widget', 2) //second ocurrence
+
+    str.lstIndexOf() or str.indexOf('widget', -1) //searches from the end to start
+
+### includes, startWith, endsWith
+    "widget with id".includes("widget") // true
+    "Hello".includes("World") // false
+    "widget".startsWith("wid") // true
+    "widget".endsWith("get") //true
+
+## Arrays
+    let arr = new Array();
+    let arr = [];
+
+    let arr = ['apple', 'orange'];
+
+    arr[0] // apple
+
+### Array methods
+
+    arr.push(..items) - adds items to the end.
+    arr.pop() - extracts an item from the end.
+
+    arr.shift() - extracts an item from the beginning
+    arr.unshift(...items) - adds items to teh beginning.
+
+    delete arr[1] or delete( arr[1] )//remove at index 1
+
+    let arr.map( function(item, index, array) ){
+        //returns the new value instad of item
+    }
+
+    let lengths = ['Bilbo', 'Gandalf', 'Nazgul'].map(item => item.length);
+    //lengths now have 5,7,6
+
+arr.map calls the function for each element of the array and returns the array of results.
+
+    arr.forEach(function(item, index, array){
+        ...
+    });
+
+
+A cheatsheet of array methods:
+
+* To add/remove elements:
+    * push(...items) – adds items to the end,
+    * pop() – extracts an item from the end,
+    * shift() – extracts an item from the beginning,
+    * unshift(...items) – adds items to the beginning.
+    * splice(pos, deleteCount, ...items) – at index pos delete deleteCount elements and insert items.
+    * slice(start, end) – creates a new array, copies elements from position start till end (not inclusive) into it.
+    * concat(...items) – returns a new array: copies all members of the current one and adds items to it. If any of items is an array, then its elements are taken.
+
+* To search among elements:
+    * indexOf/lastIndexOf(item, pos) – look for item starting from position pos, return the index or -1 if not found.
+    * includes(value) – returns true if the array has value, otherwise false.
+    * find/filter(func) – filter elements through the function, return first/all values that make it return true.
+    * findIndex is like find, but returns the index instead of a value.
+
+* To transform the array:
+    * map(func) – creates a new array from results of calling func for every element.
+    * sort(func) – sorts the array in-place, then returns it.
+    * reverse() – reverses the array in-place, then returns it.
+    * split/join – convert a string to array and back.
+    * reduce(func, initial) – calculate a single value over the array by calling func for each element and passing an intermediate result between the calls.
+
+* To iterate over elements:
+    * forEach(func) – calls func for every element, does not return anything.
+
+* Additionally:
+    * Array.isArray(arr) checks arr for being an array.
+
+Please note that methods sort, reverse and splice modify the array itself.
